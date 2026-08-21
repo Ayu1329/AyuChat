@@ -1,0 +1,15 @@
+{
+  "name": "ayuchat",
+  "private": true,
+  "packageManager": "pnpm@9.15.4",
+  "description": "AyuChat — IM client & server",
+  "scripts": {
+    "docs:dev": "docsify serve prd --port 3000 --open",
+    "docs:serve": "docsify serve prd --port 3000",
+    "desktop:dev": "pnpm --filter @ayuchat/desktop dev",
+    "desktop:build": "pnpm --filter @ayuchat/desktop build"
+  },
+  "devDependencies": {
+    "docsify-cli": "^4.4.4"
+  }
+}

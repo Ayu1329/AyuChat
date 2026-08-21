@@ -1,0 +1,43 @@
+---
+description: 函数/方法必须写标准 JSDoc 注释
+globs: "**/*.{ts,tsx,js,jsx}"
+alwaysApply: false
+---
+
+# 函数注释规范
+
+新增或修改的函数、方法、导出函数必须带 JSDoc 标准注释。
+
+## 要求
+
+- 用中文简要说明用途
+- 有参数写 `@param`，有返回值写 `@returns`
+- 可能抛错时写 `@throws`
+- 简单一行能说清的可用单行 `/** ... */`，复杂逻辑用多行
+
+## 示例
+
+```typescript
+/**
+ * 创建并配置主窗口。
+ * @returns 无返回值
+ */
+function createWindow(): void {}
+
+/**
+ * 按用户 ID 拉取会话列表。
+ * @param userId - 当前用户 ID
+ * @returns 会话摘要数组
+ */
+async function listSessions(userId: string): Promise<SessionSummary[]> {}
+```
+
+## 可不写注释
+
+- 组件内仅几行、意图一目了然的事件回调（如 `() => setOpen(true)`）
+- 框架要求的默认导出入口（如 `main.tsx` 的 render 调用）若无独立函数可省略
+---
+
+# 注意
+
+缺注释的新增函数视为未完成，提交前补齐。
