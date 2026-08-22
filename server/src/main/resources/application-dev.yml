@@ -1,0 +1,13 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+ayuchat:
+  sms:
+    mock-enabled: true
+    mock-code: "123456"
+
+logging:
+  level:
+    com.ayuchat: DEBUG

@@ -1,17 +1,28 @@
+import { Link } from "react-router-dom";
+import AuthCard from "./AuthCard";
 import PwdLogin from "./PwdLogin";
 
 /**
- * 登录组件：点击登录进入会话页。
- * @returns 登录页内容
+ * 登录组件：居中卡片表单；下方左注册、右忘记密码。
  */
 export default function LoginComponent() {
   return (
-    <div className="w-full">
-      <p className="mb-3 text-[28px] font-bold tracking-tight text-primary">
-        AyuChat
-      </p>
-      <p className="mb-6 leading-relaxed text-muted">欢迎使用 AyuChat</p>
+    <AuthCard subtitle="欢迎使用 AyuChat">
       <PwdLogin />
-    </div>
+      <div className="mt-4 flex items-center justify-between text-sm">
+        <Link
+          to="/register"
+          className="font-medium text-muted hover:text-fg"
+        >
+          注册账号
+        </Link>
+        <Link
+          to="/forget-password"
+          className="font-medium text-muted hover:text-fg"
+        >
+          忘记密码
+        </Link>
+      </div>
+    </AuthCard>
   );
 }

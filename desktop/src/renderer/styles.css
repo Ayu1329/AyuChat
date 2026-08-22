@@ -10,6 +10,9 @@
   --color-fg: #0f1a1c;
   --color-muted: #5c757a;
   --color-border: #d0dee1;
+  --color-danger: #c23b3b;
+  --color-danger-hover: #d14a4a;
+  --color-danger-active: #a83232;
   --color-bubble-self: #2f5d66;
   --color-bubble-other: #e6eef0;
   --font-sans: "Segoe UI", system-ui, -apple-system, sans-serif;

@@ -7,7 +7,9 @@
     "docs:dev": "docsify serve prd --port 3000 --open",
     "docs:serve": "docsify serve prd --port 3000",
     "desktop:dev": "pnpm --filter @ayuchat/desktop dev",
-    "desktop:build": "pnpm --filter @ayuchat/desktop build"
+    "desktop:build": "pnpm --filter @ayuchat/desktop build",
+    "server:dev": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"$jh=[Environment]::GetEnvironmentVariable('JAVA_HOME','Machine'); if($jh){$env:JAVA_HOME=$jh.TrimEnd('\\')}; $env:Path=[Environment]::GetEnvironmentVariable('Path','Machine')+';'+[Environment]::GetEnvironmentVariable('Path','User'); Set-Location server; cmd /c mvnw.cmd spring-boot:run\"",
+    "server:build": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"$jh=[Environment]::GetEnvironmentVariable('JAVA_HOME','Machine'); if($jh){$env:JAVA_HOME=$jh.TrimEnd('\\')}; $env:Path=[Environment]::GetEnvironmentVariable('Path','Machine')+';'+[Environment]::GetEnvironmentVariable('Path','User'); Set-Location server; cmd /c mvnw.cmd -q package -DskipTests\""
   },
   "devDependencies": {
     "docsify-cli": "^4.4.4"

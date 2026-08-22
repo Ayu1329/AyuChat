@@ -1,0 +1,16 @@
+{
+  "name": "@ayuchat/connect",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "AyuChat HTTP connect layer",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2"
+  }
+}

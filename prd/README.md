@@ -18,6 +18,7 @@ pnpm docs:dev
 | 文档 | 说明 |
 |------|------|
 | [UI 总方案](Fronted_part/UI/ui_setting.md) | 前端 UI 布局、组件、Design Tokens、分期路线 |
+| [鉴权 PRD](auth/auth_prd.md) | 注册、登录、忘记密码流程与 API 契约 |
 | [Docsify 文档方案](docs-workflow.md) | 本地预览、新增文档、Git 协作流程 |
 
 ## 目录约定
@@ -28,9 +29,11 @@ prd/
 ├── _sidebar.md            ← 左侧导航（新增文档时需同步更新）
 ├── index.html             ← Docsify 入口（勿删）
 ├── docs-workflow.md       ← 文档工作流说明
-└── Fronted_part/          ← 前端相关 PRD
-    └── UI/
-        └── ui_setting.md
-```
+├── Fronted_part/          ← 前端相关 PRD
+│   └── UI/
+│       └── ui_setting.md
+└── auth/                  ← 鉴权（注册 / 登录 / 忘记密码）
+    ├── README.md
+    └── auth_prd.md```
 
 后续可在 `prd/` 下按模块扩展，例如 `Server/`、`Connect/` 等，无需改变 MD 存放方式。

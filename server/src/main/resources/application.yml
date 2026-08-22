@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: ayuchat-server
+  profiles:
+    active: dev
+
+  datasource:
+    url: jdbc:h2:file:./data/ayuchat;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+
+server:
+  port: 8080
+
+ayuchat:
+  jwt:
+    secret: change-me-in-production-use-long-random-string
+    access-token-expires-seconds: 604800
+    refresh-token-expires-seconds: 2592000
+  sms:
+    mock-enabled: false
+    mock-code: "123456"
+    code-expires-seconds: 300
+    retry-after-seconds: 60
+  verify-token-expires-seconds: 600
+
+logging:
+  level:
+    com.ayuchat: DEBUG
+    org.hibernate.SQL: DEBUG

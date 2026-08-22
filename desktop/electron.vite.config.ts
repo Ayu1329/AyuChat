@@ -13,7 +13,16 @@ export default defineConfig({
   renderer: {
     resolve: {
       alias: {
-        "@": resolve("src"),
+        "@": resolve("src/renderer"),
+        "@ayuchat/connect": resolve("../connect/src/index.ts"),
+      },
+    },
+    server: {
+      proxy: {
+        "/api/v1": {
+          target: "http://localhost:8080",
+          changeOrigin: true,
+        },
       },
     },
     // @tailwindcss/vite and electron-vite resolve different vite type graphs under pnpm
