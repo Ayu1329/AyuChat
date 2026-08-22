@@ -103,7 +103,8 @@ desktop/
 │   └── renderer/             # React 渲染进程
 │       ├── ayuapi/           # API 封装（带日志）
 │       ├── auth/             # 登录态 session
-│       └── components/       # 页面与 UI 组件
+│       ├── ui/               # 可复用 UI 组件（Button、Dialog、Avatar 等）
+│       └── components/       # 页面与功能组件（Chat、Settings 等）
 └── package.json
 ```
 

@@ -8,6 +8,8 @@ import {
 
   get,
 
+  patch,
+
   post,
 
   type LoginResponse,
@@ -34,7 +36,7 @@ export interface AyuFetchCall<TBody = unknown> {
 
   path: string;
 
-  method?: "GET" | "POST" | "DELETE";
+  method?: "GET" | "POST" | "PATCH" | "DELETE";
 
   body?: TBody;
 
@@ -159,11 +161,17 @@ export async function ayufetch<TResponse, TBody = unknown>(
         ? await get<TResponse>(path, token)
         : method === "DELETE"
           ? await del<TResponse>(path, token)
-          : await post<TResponse>(
-              path,
-              body === undefined ? {} : body,
-              token,
-            );
+          : method === "PATCH"
+            ? await patch<TResponse>(
+                path,
+                body === undefined ? {} : body,
+                token,
+              )
+            : await post<TResponse>(
+                path,
+                body === undefined ? {} : body,
+                token,
+              );
 
     console.log("Response", sanitizeForLog(response));
 

@@ -31,6 +31,9 @@ public class User {
     @Column(name = "password_hash", nullable = false, length = 100)
     private String passwordHash;
 
+    @Column(length = 32)
+    private String name;
+
     @Column(nullable = false)
     private boolean disabled = false;
 
@@ -67,6 +70,14 @@ public class User {
 
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public boolean isDisabled() {

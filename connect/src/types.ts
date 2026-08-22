@@ -4,6 +4,11 @@ export interface User {
   id: string;
   phone: string;
   country_code: string;
+  name?: string | null;
+}
+
+export interface UpdateProfileRequest {
+  name?: string | null;
 }
 
 export interface SmsSendRequest {

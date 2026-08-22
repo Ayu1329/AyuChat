@@ -64,12 +64,14 @@
 | `id` | string | 用户唯一标识（UUID） |
 | `phone` | string | 11 位国内手机号，不含国家码 |
 | `country_code` | string | 国家码，v1 固定 `+86` |
+| `name` | string \| null | 用户昵称；未设置时为 `null` |
 
 ```json
 {
   "id": "550e8400-e29b-41d4-a716-446655440000",
   "phone": "13800138000",
-  "country_code": "+86"
+  "country_code": "+86",
+  "name": "小明"
 }
 ```
 

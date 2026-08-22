@@ -1,13 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  LogOut,
   Plus,
   Settings,
   UserPlus,
   Users,
 } from "lucide-react";
-import { Button, Input, cn } from "@/ui";
+import { Avatar, Button, Input, cn } from "@/ui";
 import {
   connectWs,
   disconnectWs,
@@ -31,6 +30,7 @@ import {
   sendMessage,
 } from "@/ayuapi";
 import { clearSession, getSession } from "../../auth/session";
+import SettingsDialog from "../SettingsComponent/SettingsDialog";
 import ConversationList, {
   type ActiveSelection,
   type Conversation,
@@ -56,6 +56,7 @@ import {
   formatRequestTime,
   formatSince,
   friendRequestPreview,
+  userDisplayLabel,
 } from "./friendTypes";
 
 type HeaderMenu = "profile" | "add" | null;
@@ -86,6 +87,8 @@ export default function ChatComponent() {
   const [query, setQuery] = useState("");
   const [sidebarTab, setSidebarTab] = useState<SidebarTab>("conversations");
   const [openMenu, setOpenMenu] = useState<HeaderMenu>(null);
+  const [settingsOpen, setSettingsOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState(() => getSession()?.user ?? null);
   const [rightView, setRightView] = useState<RightView>("chat");
   const [friendRequests, setFriendRequests] = useState<FriendRequest[]>([]);
   const [friends, setFriends] = useState<FriendListItem[]>([]);
@@ -536,6 +539,26 @@ export default function ChatComponent() {
     return () => document.removeEventListener("mousedown", handlePointerDown);
   }, [openMenu]);
 
+  function openSettings() {
+    closeMenu();
+    setSettingsOpen(true);
+  }
+
+  async function handleLogout() {
+    const session = getSession();
+    if (session?.accessToken) {
+      try {
+        await apiLogout(session.accessToken);
+      } catch {
+        // 无论接口是否成功，都清除本地凭证
+      }
+    }
+    disconnectWs();
+    clearSession();
+    setSettingsOpen(false);
+    navigate("/login", { replace: true });
+  }
+
   function closeMenu() {
     setOpenMenu(null);
   }
@@ -684,53 +707,27 @@ export default function ChatComponent() {
       <aside className="flex w-[300px] shrink-0 flex-col border-r border-border bg-surface/80">
         <div className="relative flex items-center justify-between border-b border-border px-3 py-3">
           <div className="relative" ref={profileRef}>
-            <button
-              type="button"
-              className="grid size-8 shrink-0 cursor-pointer place-items-center rounded-full bg-primary/15 text-xs font-semibold text-primary transition-colors hover:bg-primary/25"
-              aria-label="个人中心"
-              aria-expanded={openMenu === "profile"}
-              onClick={() =>
-                setOpenMenu((current) =>
-                  current === "profile" ? null : "profile",
-                )
-              }
-            >
-              我
-            </button>
+            {currentUser ? (
+              <Avatar
+                label={userDisplayLabel(currentUser)}
+                aria-label="个人中心"
+                onClick={() =>
+                  setOpenMenu((current) =>
+                    current === "profile" ? null : "profile",
+                  )
+                }
+              />
+            ) : null}
             {openMenu === "profile" ? (
               <div className={cn(menuPanelClass, "left-0")} role="menu">
                 <button
                   type="button"
                   role="menuitem"
                   className={menuItemClass}
-                  onClick={closeMenu}
+                  onClick={openSettings}
                 >
                   <Settings className="size-4 shrink-0 text-muted" />
                   设置
-                </button>
-                <button
-                  type="button"
-                  role="menuitem"
-                  className={menuItemClass}
-                  onClick={() => {
-                    void (async () => {
-                      const session = getSession();
-                      if (session?.accessToken) {
-                        try {
-                          await apiLogout(session.accessToken);
-                        } catch {
-                          // 无论接口是否成功，都清除本地凭证
-                        }
-                      }
-                      disconnectWs();
-                      clearSession();
-                      closeMenu();
-                      navigate("/login", { replace: true });
-                    })();
-                  }}
-                >
-                  <LogOut className="size-4 shrink-0 text-muted" />
-                  退出登录
                 </button>
               </div>
             ) : null}
@@ -852,6 +849,16 @@ export default function ChatComponent() {
           </div>
         )}
       </section>
+
+      {currentUser ? (
+        <SettingsDialog
+          open={settingsOpen}
+          user={currentUser}
+          onClose={() => setSettingsOpen(false)}
+          onUserUpdated={setCurrentUser}
+          onLogout={() => void handleLogout()}
+        />
+      ) : null}
     </div>
   );
 }

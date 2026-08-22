@@ -79,3 +79,11 @@ export function get<T>(path: string, token?: string | null): Promise<T> {
 export function del<T>(path: string, token?: string | null): Promise<T> {
   return request<T>(path, { method: "DELETE", token });
 }
+
+export function patch<T>(
+  path: string,
+  body: unknown,
+  token?: string | null,
+): Promise<T> {
+  return request<T>(path, { method: "PATCH", body, token });
+}

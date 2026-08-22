@@ -244,7 +244,10 @@
 | `SystemMessage` | 系统提示 |
 | `MessageStatus` | 发送状态图标 |
 | `Composer` | 输入区 |
-| `Avatar` | 头像 + 在线状态 |
+| `Avatar` | 头像 + 在线状态 | ✅ Desktop `ui/Avatar` |
+| `Dialog` | 通用弹窗（遮罩 + 面板） | ✅ Desktop `ui/Dialog` |
+| `ConfirmDialog` | 二次确认弹窗 | ✅ Desktop `ui/ConfirmDialog` |
+| `SettingsDialog` | 设置页（左右分栏：导航 + 内容） | ✅ Desktop `SettingsComponent` |
 | `UnreadBadge` | 未读角标 |
 | `SearchBar` | 全局搜索 |
 | `EmptyState` | 各场景空状态 |

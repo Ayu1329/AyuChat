@@ -12,6 +12,17 @@ export function formatAccount(user: UserSummary): string {
   return `${user.country_code} ${user.phone}`;
 }
 
+import type { User } from "@ayuchat/connect";
+
+export function userDisplayLabel(user: User): string {
+  const trimmed = user.name?.trim();
+  return trimmed || maskPhone(user.phone);
+}
+
+export function userAvatarInitial(user: User): string {
+  return userDisplayLabel(user).slice(0, 1);
+}
+
 export function displayLabel(user: UserSummary): string {
   return user.display_name || maskPhone(user.phone);
 }

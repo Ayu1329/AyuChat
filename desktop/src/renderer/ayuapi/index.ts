@@ -3,3 +3,4 @@ export type { AyuFetchCall } from "./ayufetch";
 export * from "./auth";
 export * from "./friend";
 export * from "./chat";
+export * from "./user";

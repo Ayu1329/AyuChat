@@ -1,7 +1,7 @@
 export { COUNTRY_CODE, apiUrl, getBaseUrl, setBaseUrl, setWsProxyTarget, wsUrl } from "./config";
 export { ConnectError, parseApiError } from "./errors";
 export type { AuthErrorCode } from "./errors";
-export { post, get, del, request, setAccessTokenProvider } from "./client";
+export { post, get, del, patch, request, setAccessTokenProvider } from "./client";
 export type { RequestOptions } from "./client";
 export * from "./auth";
 export * from "./friend";

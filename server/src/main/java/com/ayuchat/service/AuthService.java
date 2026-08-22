@@ -22,6 +22,7 @@ import com.ayuchat.repository.UserRepository;
 import com.ayuchat.repository.VerifyTokenRepository;
 import com.ayuchat.security.JwtService;
 import com.ayuchat.support.AuthValidation;
+import com.ayuchat.support.UserPresentation;
 import java.security.SecureRandom;
 import java.time.Instant;
 import java.util.UUID;
@@ -315,6 +316,6 @@ public class AuthService {
     }
 
     private UserDto toUserDto(User user) {
-        return new UserDto(user.getId(), user.getPhone(), user.getCountryCode());
+        return UserPresentation.toDto(user);
     }
 }

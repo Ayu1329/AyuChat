@@ -93,6 +93,7 @@ erDiagram
 | `country_code` | VARCHAR(8) | NOT NULL | 国家码，v1 固定 `+86` |
 | `phone` | VARCHAR(20) | NOT NULL | 手机号 |
 | `password_hash` | VARCHAR(100) | NOT NULL | BCrypt 哈希 |
+| `name` | VARCHAR(32) | NULL | 用户昵称；空则对外展示掩码手机号 |
 | `disabled` | BOOLEAN | NOT NULL, default false | 账号禁用 |
 | `created_at` | TIMESTAMP | NOT NULL | 注册时间 |
 
@@ -255,7 +256,7 @@ erDiagram
 
 | API 模型 | 主要来源表 |
 |----------|------------|
-| `User` / `UserSummary` | `users`（展示名由服务端掩码手机号生成） |
+| `User` / `UserSummary` | `users`（`display_name` 由昵称或掩码手机号生成） |
 | `FriendRequest` | `friend_requests` + `users` |
 | `Friend` | `friendships` + `users` |
 | `Conversation` | `conversations` + `conversation_participants` + `users` + `chat_messages`（last） |

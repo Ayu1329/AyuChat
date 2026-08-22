@@ -47,6 +47,12 @@ export function clearSession() {
   sessionStorage.removeItem(SESSION_KEY);
 }
 
+export function updateSessionUser(user: User) {
+  const current = getSession();
+  if (!current) return;
+  setSession({ ...current, user });
+}
+
 export function isLoggedIn() {
   return getSession() != null;
 }
