@@ -1,6 +1,9 @@
 # AyuChat Server（Java / Spring Boot）
 
-标准分层后端，当前实现 **鉴权 PRD**（`prd/auth/auth_prd.md`）。
+标准分层后端，当前实现 **鉴权** 与 **聊天（好友 / 会话 / 消息）**。
+
+- 表结构说明：[prd/server/database_schema.md](../prd/server/database_schema.md)
+- 改表或改 API 时请同步更新该文档与对应 `*_api.md`。
 
 ## 技术栈
 

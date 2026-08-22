@@ -1,0 +1,9 @@
+{
+  "host": "121.43.247.163",
+  "user": "root",
+  "port": 22,
+  "remoteDir": "/opt/ayuchat",
+  "jarName": "ayuchat-server-0.1.0-SNAPSHOT.jar",
+  "springProfile": "dev",
+  "serverPort": 8080
+}

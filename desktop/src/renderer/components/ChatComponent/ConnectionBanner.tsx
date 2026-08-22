@@ -15,7 +15,7 @@ export default function ConnectionBanner({ onReconnect }: ConnectionBannerProps)
       role="status"
     >
       <WifiOff className="size-4 shrink-0" aria-hidden />
-      <span>网络已断开，消息将发送失败</span>
+      <span>实时连接已断开，消息可能无法及时送达</span>
       <Button
         type="button"
         variant="ghost"

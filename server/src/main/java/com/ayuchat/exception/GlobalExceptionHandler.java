@@ -1,6 +1,7 @@
 package com.ayuchat.exception;
 
 import com.ayuchat.domain.AuthErrorCode;
+import com.ayuchat.domain.ChatErrorCode;
 import java.util.Map;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(ChatException.class)
+    public ResponseEntity<Map<String, Object>> handleChat(ChatException ex) {
+        HttpStatus status = mapChatStatus(ex.getCode());
+        return ResponseEntity.status(status).body(chatErrorBody(ex.getCode(), ex.getMessage()));
+    }
 
     @ExceptionHandler(AuthException.class)
     public ResponseEntity<Map<String, Object>> handleAuth(AuthException ex) {
@@ -34,6 +41,32 @@ public class GlobalExceptionHandler {
         }
         return ResponseEntity.badRequest()
                 .body(errorBody(AuthErrorCode.INVALID_PHONE, ex.getMessage()));
+    }
+
+    private static HttpStatus mapChatStatus(ChatErrorCode code) {
+        switch (code) {
+            case USER_NOT_FOUND:
+            case FRIEND_REQUEST_NOT_FOUND:
+            case CONVERSATION_NOT_FOUND:
+                return HttpStatus.NOT_FOUND;
+            case CANNOT_ADD_SELF:
+            case ALREADY_FRIENDS:
+            case FRIEND_REQUEST_PENDING:
+                return HttpStatus.CONFLICT;
+            case FORBIDDEN:
+            case NOT_FRIENDS:
+                return HttpStatus.FORBIDDEN;
+            default:
+                return HttpStatus.BAD_REQUEST;
+        }
+    }
+
+    private static Map<String, Object> chatErrorBody(ChatErrorCode code, String message) {
+        return Map.of(
+                "error",
+                Map.of(
+                        "code", code.name(),
+                        "message", message));
     }
 
     private static HttpStatus mapStatus(AuthErrorCode code) {

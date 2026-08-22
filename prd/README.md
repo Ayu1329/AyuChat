@@ -19,6 +19,8 @@ pnpm docs:dev
 |------|------|
 | [UI 总方案](Fronted_part/UI/ui_setting.md) | 前端 UI 布局、组件、Design Tokens、分期路线 |
 | [鉴权 PRD](auth/auth_prd.md) | 注册、登录、忘记密码流程与 API 契约 |
+| [聊天 PRD](chat/chat_prd.md) | 好友单聊、纯文本消息、可扩展消息模型 |
+| [数据库表结构](server/database_schema.md) | 全表字段、关系、变更流程（改表 / 改接口须同步更新） |
 | [Docsify 文档方案](docs-workflow.md) | 本地预览、新增文档、Git 协作流程 |
 
 ## 目录约定
@@ -32,8 +34,17 @@ prd/
 ├── Fronted_part/          ← 前端相关 PRD
 │   └── UI/
 │       └── ui_setting.md
-└── auth/                  ← 鉴权（注册 / 登录 / 忘记密码）
+├── auth/                  ← 鉴权（注册 / 登录 / 忘记密码）
+│   ├── README.md
+│   ├── auth_prd.md
+│   └── auth_api.md
+├── chat/                  ← 聊天（好友单聊 / 文本消息）
+│   ├── README.md
+│   ├── chat_prd.md
+│   └── chat_api.md
+└── server/                ← 后端（数据库、部署）
     ├── README.md
-    └── auth_prd.md```
+    └── database_schema.md
+```
 
-后续可在 `prd/` 下按模块扩展，例如 `Server/`、`Connect/` 等，无需改变 MD 存放方式。
+后续可在 `prd/` 下按模块扩展，例如 `Connect/` 等，无需改变 MD 存放方式。

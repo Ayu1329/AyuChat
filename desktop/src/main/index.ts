@@ -1,6 +1,8 @@
 import { app, BrowserWindow, shell } from "electron";
 import { join } from "path";
 
+const isDev = !app.isPackaged;
+
 function resolveIconPath(): string {
   if (app.isPackaged) {
     return join(process.resourcesPath, "icon.png");
@@ -23,6 +25,8 @@ function createWindow(): void {
       contextIsolation: true,
       nodeIntegration: false,
       sandbox: false,
+      // 打包后页面为 file://，需允许请求本地/远程 API（否则 fetch 会直接失败）
+      webSecurity: isDev,
     },
   });
 

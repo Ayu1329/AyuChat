@@ -68,8 +68,11 @@ web_modules/
 
 # dotenv environment variable files
 .env
-.env.*
+.env.local
 !.env.example
+!.env.development
+!.env.development.remote
+!.env.production
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
@@ -150,3 +153,4 @@ Thumbs.db
 # AyuChat desktop build artifacts (also covered by out/dist above)
 desktop/out/
 desktop/dist/
+scripts/.tmp/

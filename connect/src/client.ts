@@ -71,3 +71,11 @@ export async function request<T>(
 export function post<T>(path: string, body: unknown, token?: string | null): Promise<T> {
   return request<T>(path, { method: "POST", body, token });
 }
+
+export function get<T>(path: string, token?: string | null): Promise<T> {
+  return request<T>(path, { method: "GET", token });
+}
+
+export function del<T>(path: string, token?: string | null): Promise<T> {
+  return request<T>(path, { method: "DELETE", token });
+}

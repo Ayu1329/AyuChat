@@ -6,6 +6,8 @@ export interface ChatMessage {
   self: boolean;
   /** 仅己方消息有状态 */
   status?: MessageStatus;
+  clientMsgId?: string;
+  seq?: number;
 }
 
 export type MessagesByConversation = Record<string, ChatMessage[]>;

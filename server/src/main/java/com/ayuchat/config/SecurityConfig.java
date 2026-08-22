@@ -1,5 +1,6 @@
 package com.ayuchat.config;
 
+import com.ayuchat.security.JsonAuthenticationEntryPoint;
 import com.ayuchat.security.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,15 +21,19 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final JsonAuthenticationEntryPoint authenticationEntryPoint;
 
-    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter) {
+    public SecurityConfig(
+            JwtAuthenticationFilter jwtAuthenticationFilter,
+            JsonAuthenticationEntryPoint authenticationEntryPoint) {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+        this.authenticationEntryPoint = authenticationEntryPoint;
     }
 
-    /** 鉴权 API 完全绕过 Security 过滤器链，避免 logout 等路径被误拦。 */
+    /** 鉴权 API 与 WebSocket 握手绕过 Security 过滤器链（WS 由 JwtHandshakeInterceptor 校验 token）。 */
     @Bean
-    WebSecurityCustomizer authApiWebSecurityCustomizer() {
-        return web -> web.ignoring().requestMatchers("/api/v1/auth/**");
+    WebSecurityCustomizer publicApiWebSecurityCustomizer() {
+        return web -> web.ignoring().requestMatchers("/api/v1/auth/**", "/api/v1/ws");
     }
 
     @Bean
@@ -46,6 +51,8 @@ public class SecurityConfig {
                                         .permitAll()
                                         .anyRequest()
                                         .authenticated())
+                .exceptionHandling(
+                        ex -> ex.authenticationEntryPoint(authenticationEntryPoint))
                 .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()));
 
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

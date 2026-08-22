@@ -1,5 +1,6 @@
 import {
   setAccessTokenProvider,
+  setWsAccessTokenProvider,
   type LoginResponse,
   type User,
 } from "@ayuchat/connect";
@@ -15,6 +16,7 @@ export interface Session {
 }
 
 setAccessTokenProvider(() => getSession()?.accessToken ?? null);
+setWsAccessTokenProvider(() => getSession()?.accessToken ?? null);
 
 export function getSession(): Session | null {
   try {

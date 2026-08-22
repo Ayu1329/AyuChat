@@ -180,18 +180,36 @@ flowchart LR
 
 ---
 
-## 9. 后续扩展（可选）
+## 9. 契约与表结构变更（必守）
 
-- [ ] 增加 `prd/Server/`、`prd/Connect/` 等模块目录
+改 **数据库表** 或 **对外 REST 接口** 时，同一 PR 内同步更新文档，避免代码与文档漂移。
+
+| 变更 | 更新文档 |
+|------|----------|
+| 表增删改列 | [database_schema.md](server/database_schema.md) + 修订记录 |
+| 鉴权 API | [auth_api.md](auth/auth_api.md) |
+| 聊天 API | [chat_api.md](chat/chat_api.md) |
+| Connect 类型 | `connect/src/types.ts` |
+| 产品行为 | 对应 `*_prd.md` |
+
+PR 自检可参考 [database_schema.md §6.2](server/database_schema.md#62-推荐-pr-检查清单)。
+
+---
+
+## 10. 后续扩展（可选）
+
+- [x] 增加 `prd/server/`（数据库 schema）
+- [ ] 增加 `prd/Connect/` 等模块目录
 - [ ] `index.html` 接入 Mermaid 插件（渲染架构图）
 - [ ] CI 检查：`_sidebar.md` 链接是否指向存在的文件
 - [ ] GitHub Pages 自动部署 `prd/`
 
 ---
 
-## 10. 修订记录
+## 11. 修订记录
 
 | 版本 | 日期 | 说明 |
 |------|------|------|
 | v1.0 | 2026-08-21 | 初版：Docsify 本地预览方案与协作流程 |
 | v1.1 | 2026-08-21 | 包管理器改为 pnpm |
+| v1.2 | 2026-08-22 | 增加契约与表结构变更同步约定 |
